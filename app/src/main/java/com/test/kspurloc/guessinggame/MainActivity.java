@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
                     if (guess >= 0) {
                         String text;
+                        ++numGuesses;
                         if (guess == answer) {
                             text = "You guessed correctly!";
                             guessButton.setText("Replay");
@@ -61,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
 
                         textViewResult.setText(text);
                         editTextGuess.setText("");
-
-                        ++numGuesses;
                     }
                 } else {
                     replay = false;

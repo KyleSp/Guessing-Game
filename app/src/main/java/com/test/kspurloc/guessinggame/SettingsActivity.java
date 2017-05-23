@@ -7,12 +7,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class SettingsActivity extends AppCompatActivity {
 
     private Intent intent;
     private Button buttonSetMax;
+    private Button buttonBack;
     private EditText editTextMax;
+    private TextView textViewMax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +24,29 @@ public class SettingsActivity extends AppCompatActivity {
 
         intent = getIntent();
         buttonSetMax = (Button) findViewById(R.id.buttonSetMax);
+        buttonBack = (Button) findViewById(R.id.buttonBack);
         editTextMax = (EditText) findViewById(R.id.editTextMax);
+        textViewMax = (TextView) findViewById(R.id.textViewMax);
+
+        textViewMax.setText("Maximum Value: " + MainActivity.max);
 
         buttonSetMax.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int newMax = checkValidInput(editTextMax);
-                MainActivity.max = newMax;
+                if (newMax > 0) {
+                    MainActivity.max = newMax;
+                    textViewMax.setText("Maximum Value: " + newMax);
+                } else {
+                    editTextMax.setText("");
+                }
+            }
+        });
+
+        buttonBack.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
